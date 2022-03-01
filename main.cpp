@@ -42,14 +42,18 @@ int main() {
     virtualWorld = ArrayInit(sx, sy, sz);
 
     // data input
-    std::cout << "\nEnter block height:\n";
+    std::cout << "\nEnter blocks height:\n";
     for(int y=0; y<sy; y++) {
         for (int x = 0; x < sx; x++) {
             // heihgt input
             int height;
-            do {
+            while( true ) {
+                std::cout << "Block (" << y << ", " << x << "):";
                 std::cin >> height;
-            } while ((height < 0) && (height > sy));
+                if((height >= 0) && (height <= sy))
+                    break;
+                std::cout << "Error input! Try again.\n";
+            }
 
             // set block
             for (int z = 0; z < height; z++)
