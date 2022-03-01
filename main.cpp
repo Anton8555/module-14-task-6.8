@@ -42,22 +42,26 @@ int main() {
     virtualWorld = ArrayInit(sx, sy, sz);
 
     // data input
-    std::cout << "\nEnter array elements:\n";
-    for(int z=0; z<sz; z++) {
-        std::cout << "Enter elements Z=" << z << " level:\n";
-        for(int y=0; y<sy; y++)
-            for(int x=0; x<sx; x++) {
-                int elem;
-                do {
-                    std::cin >> elem;
-                }while( (elem != 0) && (elem != 1) );
-                virtualWorld[z][y][x] = elem;
-            }
+    std::cout << "\nEnter block height:\n";
+    for(int y=0; y<sy; y++) {
+        for (int x = 0; x < sx; x++) {
+            // heihgt input
+            int height;
+            do {
+                std::cin >> height;
+            } while ((height < 0) && (height > sy));
+
+            // set block
+            for (int z = 0; z < height; z++)
+                virtualWorld[z][y][x] = 1;
+        }
     }
 
     // level number input
-    std::cout << "\nEnter level:";
-    std::cin >> level;
+    do {
+        std::cout << "\nEnter level:";
+        std::cin >> level;
+    }while( (level<0) || (level>=sz) );
 
     // level output
     std::cout << "\nLevel = " << level << std::endl;
